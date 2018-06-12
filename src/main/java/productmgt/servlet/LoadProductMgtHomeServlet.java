@@ -30,13 +30,11 @@ public class LoadProductMgtHomeServlet extends HttpServlet {
         isSearch = (String) request.getAttribute("isSearch");
         
         if(isSearch != null){
-           productlist=this.getProductList();
+//           productlist=this.getProductList();
         }else{
-           productlist=this.getAllProductList();
+//           productlist=this.getAllProductList();
         }
-        
-        this.getProductList();
-        
+       
         rd = request.getRequestDispatcher("/productmgt/productmgthome.jsp");
         rd.forward(request, response);
     }
@@ -80,12 +78,12 @@ public class LoadProductMgtHomeServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private List<ProductMgtBean> getProductList() {
-        
-    }
-
-    private List<ProductMgtBean> getAllProductList() {
-        
-    }
+//    private List<ProductMgtBean> getProductList() {
+//        
+//    }
+//
+//    private List<ProductMgtBean> getAllProductList() {
+//        
+//    }
 
 }
