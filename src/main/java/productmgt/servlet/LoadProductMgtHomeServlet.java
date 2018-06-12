@@ -3,21 +3,39 @@ package productmgt.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import productmgt.bean.ProductMgtBean;
+import productmgt.service.ProductMgtService;
 
 /**
  *
  * @author Dinesh
  */
 public class LoadProductMgtHomeServlet extends HttpServlet {
-
+    
+    private ProductMgtBean producmgtbean ;
+    private ProductMgtService productmgtservice;
+    private List<ProductMgtBean> productlist;
     RequestDispatcher rd ;
+    private String isSearch;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        isSearch = (String) request.getAttribute("isSearch");
+        
+        if(isSearch != null){
+           productlist=this.getProductList();
+        }else{
+           productlist=this.getAllProductList();
+        }
+        
+        this.getProductList();
         
         rd = request.getRequestDispatcher("/productmgt/productmgthome.jsp");
         rd.forward(request, response);
@@ -61,5 +79,13 @@ public class LoadProductMgtHomeServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private List<ProductMgtBean> getProductList() {
+        
+    }
+
+    private List<ProductMgtBean> getAllProductList() {
+        
+    }
 
 }

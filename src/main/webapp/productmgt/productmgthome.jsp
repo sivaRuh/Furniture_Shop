@@ -129,9 +129,9 @@
                   <td>08</td>
                   <td>Active</td>
                   <td  style="white-space: nowrap">
-                      <a href="UpdateProductServlet"><i class="fa fa-wpforms" style="font-size: 20px;"></i></a>
-                      <a href="ViewProductServlet"><i class="fa fa-pencil-square-o" style="font-size: 20px;"></i></a>
-                      <a href="DeleteProductServlet"><i class="fa fa-close" style="font-size: 20px;"></i></a>
+                      <a href="UpdateProductServlet"><i class="fa fa-wpforms" style="font-size: 20px;" title="View"></i></a>
+                      <a href="ViewProductServlet"><i class="fa fa-pencil-square-o" style="font-size: 20px;" title="Update"></i></a>
+                      <a href="DeleteProductServlet"><i class="fa fa-close" style="font-size: 20px;" title="Delete"></i></a>
                   </td>
                 </tr>
 
@@ -145,9 +145,9 @@
                   <td>11</td>
                   <td>Active</td>
                   <td style="white-space: nowrap">
-                      <a href="UpdateProductServlet"><i class="fa fa-wpforms" style="font-size: 20px;"></i></a>
-                      <a href="ViewProductServlet"><i class="fa fa-pencil-square-o" style="font-size: 20px;"></i></a>
-                      <a href="DeleteProductServlet"><i class="fa fa-close" style="font-size: 20px;"></i></a>
+                      <a href="UpdateProductServlet"><i class="fa fa-wpforms" style="font-size: 20px;" title="View"></i></a>
+                      <a href="ViewProductServlet"><i class="fa fa-pencil-square-o" style="font-size: 20px;" title="Update"></i></a>
+                      <a href="DeleteProductServlet"><i class="fa fa-close" style="font-size: 20px;" title="Delete"></i></a>
                   </td>
                 </tr>
 
@@ -161,9 +161,9 @@
                   <td>3</td>
                   <td>Deactive</td>
                   <td style="white-space: nowrap">
-                      <a href="UpdateProductServlet"><i class="fa fa-wpforms" style="font-size: 20px;"></i></a>
-                      <a href="ViewProductServlet"><i class="fa fa-pencil-square-o" style="font-size: 20px;"></i></a>
-                      <a href="DeleteProductServlet"><i class="fa fa-close" style="font-size: 20px;"></i></a>
+                      <a href="UpdateProductServlet"><i class="fa fa-wpforms" style="font-size: 20px;" title="View"></i></a>
+                      <a href="ViewProductServlet"><i class="fa fa-pencil-square-o" style="font-size: 20px;" title="Update"></i></a>
+                      <a href="DeleteProductServlet"><i class="fa fa-close" style="font-size: 20px;" title="Delete"></i></a>
                   </td>
                 </tr>
 
