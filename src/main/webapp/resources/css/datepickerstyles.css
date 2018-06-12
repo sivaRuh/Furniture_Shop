@@ -1,0 +1,14 @@
+
+/* 
+    Created on : Jun 5, 2018, 11:51:39 PM
+    Author     : Dinesh
+*/
+
+mydatepicker{
+::-webkit-datetime-edit-year-field:not([aria-valuenow]),
+::-webkit-datetime-edit-month-field:not([aria-valuenow]),
+::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
+    color: transparent;
+}
+}
+
