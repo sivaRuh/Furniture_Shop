@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import productmgt.bean.ProductMgtBean;
 import productmgt.service.ProductMgtService;
 
@@ -21,18 +22,38 @@ public class LoadProductMgtHomeServlet extends HttpServlet {
     private ProductMgtBean producmgtbean ;
     private ProductMgtService productmgtservice;
     private List<ProductMgtBean> productlist;
-    RequestDispatcher rd ;
+    private RequestDispatcher rd ;
     private String isSearch;
+    
+    //private SessionVarList sessionVarlist;
+    //private SessionUser sessionUser;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        isSearch = (String) request.getAttribute("isSearch");
-        
-        if(isSearch != null){
-//           productlist=this.getProductList();
-        }else{
-//           productlist=this.getAllProductList();
+        try{
+            //HttpSession sessionObj = request.getSession(false);
+            //sessionVarlist = (SessionVarList) sessionObj.getAttribute(SessionObject);
+            //sessionUser = sessionVarlist.getCMSSessionUser();
+            
+            isSearch = (String) request.getAttribute("isSearch");
+
+            if(isSearch != null){
+               producmgtbean = new ProductMgtBean();
+               
+//               producmgtbean.setProductId();
+//               producmgtbean.setProductName();
+//               producmgtbean.setCategory();
+//               producmgtbean.setSubCategory();
+//               producmgtbean.setListedFromDate();
+//               producmgtbean.setListedToDate();
+               
+               productlist=this.getProductList(producmgtbean);
+            }else{
+                 productlist=this.getAllProductList();
+            }
+        }catch(Exception e){
+            
         }
        
         rd = request.getRequestDispatcher("/productmgt/productmgthome.jsp");
@@ -78,12 +99,39 @@ public class LoadProductMgtHomeServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-//    private List<ProductMgtBean> getProductList() {
-//        
-//    }
-//
-//    private List<ProductMgtBean> getAllProductList() {
-//        
-//    }
+    private List<ProductMgtBean> getAllProductList() throws Exception {
+        productmgtservice = new ProductMgtService();
+        productlist = productmgtservice.getAllProductList();
+        
+        return productlist;
+    }
+    
+    private List<ProductMgtBean> getProductList(ProductMgtBean searchbean) throws Exception {
+        productmgtservice = new ProductMgtService();
+        String condition ="";
+        
+        if(searchbean.getProductId() != null){
+            condition = condition+" AND PRODUCTID = "+ searchbean.getProductId();
+        }
+        if(searchbean.getProductName() != null && !searchbean.getProductName().equals("") ){
+            condition = condition+" AND PRODUCTNAME = "+ searchbean.getProductName();
+        }
+        if(searchbean.getCategory() != null && !searchbean.getCategory().equals("") ){
+            condition = condition+" AND CATEGORY = "+ searchbean.getCategory();
+        }
+        if(searchbean.getSubCategory() != null && !searchbean.getSubCategory().equals("") ){
+            condition = condition+" AND SUBCATEGORY = "+ searchbean.getSubCategory();
+        }
+        if(searchbean.getListedFromDate() != null){
+            condition = condition+" AND LISTEDDATE >= "+ searchbean.getListedFromDate();
+        }
+        if(searchbean.getListedToDate() != null ){
+            condition = condition+" AND LISTEDDATE <= "+ searchbean.getListedToDate();
+        }
+        
+        productlist = productmgtservice.getProductList(condition);
+        
+        return productlist;
+    }
 
 }

@@ -12,13 +12,14 @@ public class DBconnection {
     
     public Statement stmt;
     public ResultSet res;
-    public Connection con;
+    
     
     public DBconnection(){
     }
     
-    public Connection getConnection() throws ClassNotFoundException, SQLException{
-        try{
+    public static Connection getConnection() throws ClassNotFoundException, SQLException{
+        Connection con = null;
+        try{            
             Class.forName("com.mysql.jdbc.Driver");
             con=DriverManager.getConnection("jdbc:mysql://localhost/furniture_shop","root","");
         }
