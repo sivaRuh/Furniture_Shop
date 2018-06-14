@@ -12,11 +12,15 @@ public class ProductMgtBean {
     private Number productId;
     private String productName;
     private String category;
-    private String subcategory;
+    private String subCategory;
     private String description;
     private String status;
     private Number quantity;
     private Date listeddate;
+    private float price;
+    
+    private Date listedFromDate;
+    private Date listedToDate;
 
     
     public Number getProductId() {
@@ -43,12 +47,12 @@ public class ProductMgtBean {
         this.category = category;
     }
 
-    public String getSubcategory() {
-        return subcategory;
+    public String getSubCategory() {
+        return subCategory;
     }
 
-    public void setSubcategory(String subcategory) {
-        this.subcategory = subcategory;
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
     }
 
     public String getDescription() {
@@ -81,6 +85,30 @@ public class ProductMgtBean {
 
     public void setListeddate(Date listeddate) {
         this.listeddate = listeddate;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public Date getListedFromDate() {
+        return listedFromDate;
+    }
+
+    public void setListedFromDate(Date listedFromDate) {
+        this.listedFromDate = listedFromDate;
+    }
+
+    public Date getListedToDate() {
+        return listedToDate;
+    }
+
+    public void setListedToDate(Date listedToDate) {
+        this.listedToDate = listedToDate;
     }
     
 }

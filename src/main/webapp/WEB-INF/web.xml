@@ -8,9 +8,17 @@
         <servlet-name>LoadProductMgtHomeServlet</servlet-name>
         <servlet-class>productmgt.servlet.LoadProductMgtHomeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchProductServlet</servlet-name>
+        <servlet-class>productmgt.servlet.SearchProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoadProductMgtHomeServlet</servlet-name>
         <url-pattern>/LoadProductMgtHomeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductServlet</servlet-name>
+        <url-pattern>/SearchProductServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
