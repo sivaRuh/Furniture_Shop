@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <welcome-file-list>
-        <welcome-file>adminhome.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
         <!--<welcome-file>welcomepage.jsp</welcome-file>-->
     </welcome-file-list>
     <servlet>
@@ -12,6 +12,10 @@
         <servlet-name>SearchProductServlet</servlet-name>
         <servlet-class>productmgt.servlet.SearchProductServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ValidateLoginServlet</servlet-name>
+        <servlet-class>login.servlet.ValidateLoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoadProductMgtHomeServlet</servlet-name>
         <url-pattern>/LoadProductMgtHomeServlet</url-pattern>
@@ -19,6 +23,10 @@
     <servlet-mapping>
         <servlet-name>SearchProductServlet</servlet-name>
         <url-pattern>/SearchProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValidateLoginServlet</servlet-name>
+        <url-pattern>/ValidateLoginServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
