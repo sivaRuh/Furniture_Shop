@@ -1,8 +1,8 @@
 
-package productmgt.servlet;
+package customermgt.servlet;
 
-
-import productmgt.bean.CategoryBean;
+import customermgt.bean.CustomerMgtBean;
+import customermgt.service.CustomerMgtService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -11,43 +11,45 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import productmgt.bean.ProductMgtBean;
-import productmgt.service.ProductMgtService;
 
 /**
  *
- * @author Dinesh
+ * @author madushan_j
  */
-public class LoadProductMgtHomeServlet extends HttpServlet {
+public class SearchCustomerServlet extends HttpServlet {
     
-    private ProductMgtService productmgtservice;
-    private List<ProductMgtBean> productlist;
-    private List<CategoryBean> categorylist;
+    private CustomerMgtBean customermgtbean ;
+    private CustomerMgtService customermgtservice;
+    private List<CustomerMgtBean> customerlist;
     private RequestDispatcher rd ;
-    private String url = "productmgt/productmgthome.jsp";
+    private String url = "customermgt/customermgthome.jsp";
     
     //private SessionVarList sessionVarlist;
     //private SessionUser sessionUser;
+
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+       
         try{
-            //HttpSession sessionObj = request.getSession(false);
-            //sessionVarlist = (SessionVarList) sessionObj.getAttribute(SessionObject);
-            //sessionUser = sessionVarlist.getCMSSessionUser();
+            customermgtbean = new CustomerMgtBean();
+
+//          customermgtbean.setCustomerId();
+//          customermgtbean.setCustomerName();
+//          customermgtbean.setEmail();
+//          customermgtbean.setCustomerStatus();
+
+            customerlist=this.getCustomerList(customermgtbean); 
             
-            productlist=this.getAllProductList();
-            categorylist=this.getCategoryList();
-            request.setAttribute("productlist",productlist);
-            request.setAttribute("categorylist",categorylist);
+            request.setAttribute("customerlist",customerlist);
             
         }catch(Exception e){
+            
         }
-       
+        
         rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -88,22 +90,31 @@ public class LoadProductMgtHomeServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private List<ProductMgtBean> getAllProductList() throws Exception {
-        List<ProductMgtBean> productslist;
-        productmgtservice = new ProductMgtService();
-        productslist = productmgtservice.getAllProductList();
-        
-        return productslist;
-    }
     
-    private List<CategoryBean> getCategoryList() throws Exception {
-        List<CategoryBean> catlist;
-        productmgtservice = new ProductMgtService();
-        catlist = productmgtservice.getCategoryList();
+    
+    private List<CustomerMgtBean> getCustomerList(CustomerMgtBean searchbean) throws Exception {
         
-        return catlist;
-
+        customermgtservice = new CustomerMgtService();
+        String condition ="";
+        
+        if(searchbean.getCustomerId() != 0){
+            condition = condition+" AND CUSTOMERID = "+ searchbean.getCustomerId();
+        }
+        if(searchbean.getCustomerName() != null && !searchbean.getCustomerName().equals("") ){
+            condition = condition+" AND NAME = "+ searchbean.getCustomerName();
+        }
+        if(searchbean.getCustomerStatus() != null && !searchbean.getCustomerStatus().equals("") ){
+            condition = condition+" AND STATUS = "+ searchbean.getCustomerStatus();
+        }
+        if(searchbean.getEmail() != null && !searchbean.getEmail().equals("") ){
+            condition = condition+" AND EMAIL = "+ searchbean.getEmail();
+        }
+        if(searchbean.getTelNo() != null && !searchbean.getTelNo().equals("") ){
+            condition = condition+" AND TELEPHONE = "+ searchbean.getTelNo();
+        }
+        
+        customerlist = customermgtservice.getCustomerList(condition);
+        
+        return customerlist;
     }
-        
 }

@@ -13,6 +13,30 @@
         <servlet-class>productmgt.servlet.SearchProductServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>LoadSubCategoriesToCategoryServlet</servlet-name>
+        <servlet-class>productmgt.servlet.LoadSubCategoriesToCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProductServlet</servlet-name>
+        <servlet-class>productmgt.servlet.DeleteProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadCustomerMgtHome</servlet-name>
+        <servlet-class>customermgt.servlet.LoadCustomerMgtHome</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchCustomerServlet</servlet-name>
+        <servlet-class>customermgt.servlet.SearchCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCustomerServlet</servlet-name>
+        <servlet-class>customermgt.servlet.ViewCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BlockCustomerServlet</servlet-name>
+        <servlet-class>customermgt.servlet.BlockCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ValidateLoginServlet</servlet-name>
         <servlet-class>login.servlet.ValidateLoginServlet</servlet-class>
     </servlet>
@@ -23,6 +47,31 @@
     <servlet-mapping>
         <servlet-name>SearchProductServlet</servlet-name>
         <url-pattern>/SearchProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadSubCategoriesToCategoryServlet</servlet-name>
+        <url-pattern>/LoadSubCategoriesToCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProductServlet</servlet-name>
+        <url-pattern>/DeleteProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadCustomerMgtHome</servlet-name>
+        <url-pattern>/LoadCustomerMgtHome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchCustomerServlet</servlet-name>
+        <url-pattern>/SearchCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCustomerServlet</servlet-name>
+        <url-pattern>/ViewCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BlockCustomerServlet</servlet-name>
+        <url-pattern>/BlockCustomerServlet</url-pattern>
+
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ValidateLoginServlet</servlet-name>

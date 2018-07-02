@@ -1,8 +1,8 @@
 
-package productmgt.servlet;
+package customermgt.servlet;
 
-
-import productmgt.bean.CategoryBean;
+import customermgt.bean.CustomerMgtBean;
+import customermgt.service.CustomerMgtService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -11,21 +11,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import productmgt.bean.ProductMgtBean;
-import productmgt.service.ProductMgtService;
 
 /**
  *
- * @author Dinesh
+ * @author madushan_j
  */
-public class LoadProductMgtHomeServlet extends HttpServlet {
-    
-    private ProductMgtService productmgtservice;
-    private List<ProductMgtBean> productlist;
-    private List<CategoryBean> categorylist;
+public class LoadCustomerMgtHome extends HttpServlet {
+
+    private CustomerMgtService customermgtservice ;
+    private List<CustomerMgtBean> customerlist;
     private RequestDispatcher rd ;
-    private String url = "productmgt/productmgthome.jsp";
+    private String url = "customermgt/customermgthome.jsp";
     
     //private SessionVarList sessionVarlist;
     //private SessionUser sessionUser;
@@ -38,16 +34,24 @@ public class LoadProductMgtHomeServlet extends HttpServlet {
             //sessionVarlist = (SessionVarList) sessionObj.getAttribute(SessionObject);
             //sessionUser = sessionVarlist.getCMSSessionUser();
             
-            productlist=this.getAllProductList();
-            categorylist=this.getCategoryList();
-            request.setAttribute("productlist",productlist);
-            request.setAttribute("categorylist",categorylist);
+            customerlist = this.getAllPCustomerList();
+            request.setAttribute("customerlist",customerlist);
             
         }catch(Exception e){
         }
        
         rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
+        
+    }
+    
+    private List<CustomerMgtBean> getAllPCustomerList() throws Exception {
+        
+        List<CustomerMgtBean> customerlist;
+        customermgtservice = new CustomerMgtService();
+        customerlist = customermgtservice.getAllCustomerList();
+        
+        return customerlist ;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -89,21 +93,4 @@ public class LoadProductMgtHomeServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private List<ProductMgtBean> getAllProductList() throws Exception {
-        List<ProductMgtBean> productslist;
-        productmgtservice = new ProductMgtService();
-        productslist = productmgtservice.getAllProductList();
-        
-        return productslist;
-    }
-    
-    private List<CategoryBean> getCategoryList() throws Exception {
-        List<CategoryBean> catlist;
-        productmgtservice = new ProductMgtService();
-        catlist = productmgtservice.getCategoryList();
-        
-        return catlist;
-
-    }
-        
 }

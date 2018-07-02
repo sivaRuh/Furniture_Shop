@@ -1,53 +1,77 @@
 
 package productmgt.servlet;
 
-
-import productmgt.bean.CategoryBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import productmgt.bean.ProductMgtBean;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import productmgt.bean.CategoryBean;
 import productmgt.service.ProductMgtService;
 
 /**
  *
- * @author Dinesh
+ * @author madushan_j
  */
-public class LoadProductMgtHomeServlet extends HttpServlet {
-    
-    private ProductMgtService productmgtservice;
-    private List<ProductMgtBean> productlist;
-    private List<CategoryBean> categorylist;
-    private RequestDispatcher rd ;
-    private String url = "productmgt/productmgthome.jsp";
-    
-    //private SessionVarList sessionVarlist;
-    //private SessionUser sessionUser;
+public class LoadSubCategoriesToCategoryServlet extends HttpServlet {
+
+    private ProductMgtService prductmgtservice;
+    private List<CategoryBean> result;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try{
-            //HttpSession sessionObj = request.getSession(false);
-            //sessionVarlist = (SessionVarList) sessionObj.getAttribute(SessionObject);
-            //sessionUser = sessionVarlist.getCMSSessionUser();
+         try {
+            String category= request.getParameter("category");
             
-            productlist=this.getAllProductList();
-            categorylist=this.getCategoryList();
-            request.setAttribute("productlist",productlist);
-            request.setAttribute("categorylist",categorylist);
+            if(!category.equals("")){
+                result=this.getSubCtategories(category);
+                if(result != null){
+                    out.print(result);
+                }                          
+            }
+            
+            // building the JSON response
+            JSONObject jsonResponse = new JSONObject();
+            
+            JSONArray row = new JSONArray();
+            
+            for (CategoryBean t : result) {
+                
+                JSONObject object = new JSONObject();
+                
+                object.put("subcatid",t.getSubcategoryid() );
+                object.put("subcatdes", t.getSubcategorydes());
+                
+                row.put(object);
+                               
+            }
+            jsonResponse.put("aaData", row);
+
+            response.setContentType("application/json");
+            response.getWriter().print(jsonResponse.toString());
             
         }catch(Exception e){
+            
+        } finally {            
+            out.close();
         }
-       
-        rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
+        
+    }
+    
+    private List<CategoryBean> getSubCtategories(String category) throws Exception {
+        List<CategoryBean> results;
+        try {
+            prductmgtservice = new ProductMgtService();
+            results = prductmgtservice.getSubCtategories(category);
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return results;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -89,21 +113,4 @@ public class LoadProductMgtHomeServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private List<ProductMgtBean> getAllProductList() throws Exception {
-        List<ProductMgtBean> productslist;
-        productmgtservice = new ProductMgtService();
-        productslist = productmgtservice.getAllProductList();
-        
-        return productslist;
-    }
-    
-    private List<CategoryBean> getCategoryList() throws Exception {
-        List<CategoryBean> catlist;
-        productmgtservice = new ProductMgtService();
-        catlist = productmgtservice.getCategoryList();
-        
-        return catlist;
-
-    }
-        
 }

@@ -18,7 +18,8 @@ import productmgt.service.ProductMgtService;
  */
 public class SearchProductServlet extends HttpServlet {
 
-    private ProductMgtBean producmgtbean ;
+
+    private ProductMgtBean productmgtbean ;
     private ProductMgtService productmgtservice;
     private List<ProductMgtBean> productlist;
     private RequestDispatcher rd ;
@@ -32,7 +33,7 @@ public class SearchProductServlet extends HttpServlet {
             throws ServletException, IOException {
         
         try{
-            producmgtbean = new ProductMgtBean();
+            productmgtbean = new ProductMgtBean();
 
 //          producmgtbean.setProductId();
 //          producmgtbean.setProductName();
@@ -41,7 +42,10 @@ public class SearchProductServlet extends HttpServlet {
 //          producmgtbean.setListedFromDate();
 //          producmgtbean.setListedToDate();
 
-            productlist=this.getProductList(producmgtbean); 
+            productlist=this.getProductList(productmgtbean); 
+            
+            request.setAttribute("productlist",productlist);
+
             
         }catch(Exception e){
             

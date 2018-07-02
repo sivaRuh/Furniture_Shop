@@ -1,53 +1,35 @@
 
 package productmgt.servlet;
 
-
-import productmgt.bean.CategoryBean;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import productmgt.bean.ProductMgtBean;
 import productmgt.service.ProductMgtService;
 
 /**
  *
- * @author Dinesh
+ * @author madushan_j
  */
-public class LoadProductMgtHomeServlet extends HttpServlet {
+public class DeleteProductServlet extends HttpServlet {
     
-    private ProductMgtService productmgtservice;
-    private List<ProductMgtBean> productlist;
-    private List<CategoryBean> categorylist;
-    private RequestDispatcher rd ;
-    private String url = "productmgt/productmgthome.jsp";
-    
-    //private SessionVarList sessionVarlist;
-    //private SessionUser sessionUser;
-    
+    private String productId;
+    private ProductMgtService prductmgtservice;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         try{
-            //HttpSession sessionObj = request.getSession(false);
-            //sessionVarlist = (SessionVarList) sessionObj.getAttribute(SessionObject);
-            //sessionUser = sessionVarlist.getCMSSessionUser();
+            productId = request.getParameter("productId");
+
+            this.deleteProduct(productId);
             
-            productlist=this.getAllProductList();
-            categorylist=this.getCategoryList();
-            request.setAttribute("productlist",productlist);
-            request.setAttribute("categorylist",categorylist);
             
         }catch(Exception e){
         }
-       
-        rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -89,21 +71,13 @@ public class LoadProductMgtHomeServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private List<ProductMgtBean> getAllProductList() throws Exception {
-        List<ProductMgtBean> productslist;
-        productmgtservice = new ProductMgtService();
-        productslist = productmgtservice.getAllProductList();
-        
-        return productslist;
+    private void deleteProduct(String productId) throws Exception{
+        try {
+            prductmgtservice = new ProductMgtService();
+            prductmgtservice.deleteProduct(productId);
+        } catch (Exception ex) {
+            throw ex;
+        }       
     }
-    
-    private List<CategoryBean> getCategoryList() throws Exception {
-        List<CategoryBean> catlist;
-        productmgtservice = new ProductMgtService();
-        catlist = productmgtservice.getCategoryList();
-        
-        return catlist;
 
-    }
-        
 }
