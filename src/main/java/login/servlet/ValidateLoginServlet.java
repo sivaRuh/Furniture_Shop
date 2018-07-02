@@ -25,7 +25,7 @@ public class ValidateLoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          try{
-            
+             System.out.println("-----------Hellow");
             
         }catch(Exception e){
         }
